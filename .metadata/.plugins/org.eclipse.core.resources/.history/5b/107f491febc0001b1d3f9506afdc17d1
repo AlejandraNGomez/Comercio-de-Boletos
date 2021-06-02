@@ -1,0 +1,19 @@
+package com.cbo.comercioBoletosOnline.models.services;
+
+import java.util.List;
+
+import com.cbo.comercioBoletosOnline.models.pojo.Cinema;
+
+public interface ICinemaServices {
+
+	public List<Cinema> findAll();
+
+	public Cinema findById(Long id);
+	
+	public Cinema findByCinemaId(Long id);
+
+	public Cinema save(Cinema cinemas);
+	
+	public void delete(Long id);
+		
+}

@@ -1,0 +1,84 @@
+package com.cbo.comercioBoletosOnline.models.entity;
+
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="peliculas")
+public class Peliculas implements Serializable {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private String nombre;
+
+	@Column(name="cinemas_Id")
+	private Long cinemasId;
+	private String caratula;
+	
+	@Column(length = 250)
+	private String descripcion;
+	private String categoria;
+
+	@Column(name="salas_id")
+	private Long salasId;
+	
+	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public Long getCinemasId() {
+		return cinemasId;
+	}
+	public void setCinemasId(Long cinemasId) {
+		this.cinemasId = cinemasId;
+	}
+	public String getCaratula() {
+		return caratula;
+	}
+	public void setCaratula(String caratula) {
+		this.caratula = caratula;
+	}
+	public String getDescripcion() {
+		return descripcion;
+	}
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+	public String getCategoria() {
+		return categoria;
+	}
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
+	}
+	public Long getSalasId() {
+		return salasId;
+	}
+	public void setSalasId(Long salasId) {
+		this.salasId = salasId;
+	}
+
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	
+
+}

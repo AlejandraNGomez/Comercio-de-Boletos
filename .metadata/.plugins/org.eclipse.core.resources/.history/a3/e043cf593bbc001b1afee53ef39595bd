@@ -1,0 +1,64 @@
+package com.cbo.comercioBoletosOnline.models.services;
+
+import java.util.ArrayList;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import com.cbo.comercioBoletosOnline.models.dao.IPeliculaDao;
+import com.cbo.comercioBoletosOnline.models.dto.PeliculaDTO;
+import com.cbo.comercioBoletosOnline.models.entity.PeliculaEntity;
+import com.cbo.comercioBoletosOnline.models.pojo.Pelicula;
+
+@Service
+public class PeliculaServiceImpl implements IPeliculaServices {
+
+	@Autowired
+	private IPeliculaDao peliculaDao;
+	@Autowired
+	private PeliculaDTO peliculaDto;
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Pelicula> findAll() {
+		List<Pelicula> peliculas = new ArrayList<Pelicula>();
+		for (PeliculaEntity peli :peliculaDao.findAll()) {
+			if (peli != null)
+				peliculas.add(this.peliculaDto.createPOJOfromEntity(peli));
+		}
+
+		return peliculas;
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Pelicula findById(Long id) {
+		return this.peliculaDto.createPOJOfromEntity(peliculaDao.findById(id).orElse(null));
+	}
+
+	@Override
+	@Transactional
+	public Pelicula save(Pelicula peliculas) {
+
+		return this.peliculaDto.createPOJOfromEntity(peliculaDao.save(this.peliculaDto.createEntityfromPOJO(peliculas)));
+	}
+
+	@Override
+	@Transactional
+	public void delete(Long id) {
+
+		peliculaDao.deleteById(id);
+	}
+
+	@Override
+	public List<Pelicula> findByNameCity(String nombreCiudad) {
+		List<Pelicula> peliculas = new ArrayList<Pelicula>();
+		for (PeliculaEntity peli : this.peliculaDao.findByCiudad(nombreCiudad)) {
+			if (peli != null)
+				peliculas.add(this.peliculaDto.createPOJOfromEntity(peli));
+		}
+
+		return peliculas;
+	}
+
+}
